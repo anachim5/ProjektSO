@@ -1,11 +1,16 @@
-# Algorytm wybiera proces ktry dotarl najwczesniej i wykonuje go do konca
-import time
-class FCFS():
-    def __init__(self):
-        self.queue=[]
-    def AddProcess(self,Time,arrivalTime):
-        self.queue.append([Time,arrivalTime])
+# Algorytm wybiera proces ktory dotarl najwczesniej i wykonuje go do konca
+class FCFS(object):
+    def __init__(self,queue):
+        self.queue=queue
+        self.AVT=0
+        self.ProcessInfo=[]
+        self.RunQ()
     def RunQ(self):
-        self.queue.sort(self,key=lambda tup:tup[1])
         for i in self.queue:
-            time.sleep(i[0])
+            if(i==self.queue[-1]):
+                continue
+            self.AVT+=int(i[2])
+            self.ProcessInfo.append((i[0],"Czas oczekiwania: " +str(self.AVT)))
+        self.AVT=self.AVT/len(self.queue)
+
+            
